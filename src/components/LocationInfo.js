@@ -5,15 +5,15 @@ class LocationInfo extends Component {
 
   render() {
     return (
-      <li>
+      <div className="location-info">
         Name: {this.props.name}
-        <li>
+        <div>
           Location: {this.props.location.address1}
-        </li>
-        <li>
+        </div>
+        <div>
           Rating: {this.props.rating}
-        </li>
-      </li>
+        </div>
+      </div>
     )
   }
 }
