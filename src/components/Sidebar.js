@@ -12,8 +12,8 @@ class Sidebar extends Component {
   }
 
   filterLocations = (e) => {
-    this.props.updateParams(this.state.query)  
-    e.preventDefault();
+    this.props.updateParams(this.state.query)
+    e.preventDefault()
   }
 
   render() {
