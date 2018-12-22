@@ -61,7 +61,6 @@ getYelpData = (params) => {
   .catch(error => {
     console.log("Yelp API Error: " + error)
   })
-  .then(console.log(params))
 }
 
 //Function that creates map and sets values to map state
@@ -74,30 +73,64 @@ initMap = () => {
   this.setState({map: map})
 }
 
+
+makeMarkerIcon = (markerColor) => {
+  let markerImage = {
+    url:'http://chart.googleapis.com/chart?chst=d_map_spin&chld=1|345|'+ markerColor +
+    '|40|_|%E2%80%A2',
+    size: new window.google.maps.Size(50,50),
+    origin: new window.google.maps.Point(0,0),
+    anchor: new window.google.maps.Point(10,34),
+    scaledSize: new window.google.maps.Size(30,50)
+  }
+  return markerImage;
+}
+
 //Marker function inspired by https://stackoverflow.com/questions/22773651/reload-markers-on-googles-maps-api/26408428
 makeMarkers = () => {
   let infowindow = new window.google.maps.InfoWindow()
   let locMarkers = []
+  const defaultIcon = this.makeMarkerIcon('c29145')
+  const hoverIcon = this.makeMarkerIcon('9c9c9c')
+
+  function toggleAnimation(marker) {
+    if (marker.getAnimation() !== null) {
+      marker.setAnimation(null)
+    } else {
+      marker.setAnimation(window.google.maps.Animation.BOUNCE)
+      setTimeout(function(){marker.setAnimation(null)}, 500)
+    }
+  }
+
   this.state.markers.map(marker => {
     marker.setMap(null)
     return null
   })
+
   this.state.locations.map(location => {
-    var content = `
+    let content = `
       <img src="${location.image_url}" height="40px" width="40px">
       <div><a href="${location.url}">${location.name} - ${location.location.address1}</a></div>
     `
-    var marker = new window.google.maps.Marker({
+    let marker = new window.google.maps.Marker({
       position: {lat: location.coordinates.latitude, lng: location.coordinates.longitude},
       map: this.state.map,
       title: location.name + " - " + location.location.address1,
-      animation: window.google.maps.Animation.DROP
+      animation: window.google.maps.Animation.DROP,
+      icon: defaultIcon
     })
-    locMarkers.push(marker)
     marker.addListener('click', function() {
       infowindow.setContent(content)
-      infowindow.open(this, marker);
+      infowindow.open(this, marker)
+      toggleAnimation(marker)
     })
+    marker.addListener('mouseover', function() {
+      this.setIcon(hoverIcon)
+    })
+    marker.addListener('mouseout', function() {
+      this.setIcon(defaultIcon)
+    })
+    locMarkers.push(marker)
     this.setState({markers: locMarkers})
     return null
   })
@@ -109,8 +142,6 @@ makeMarkers = () => {
         <Sidebar
           locationData={this.state.locations}
           updateParams={this.updateParams}
-          makeMarkers={this.makeMarkers}
-          getYelpData={this.getYelpData}
         />
         <Map/>
       </div>
