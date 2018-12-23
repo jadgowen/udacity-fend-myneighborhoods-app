@@ -9,6 +9,8 @@ class Locations extends Component {
         <LocationInfo
           key={location.id}
           {...location}
+          makeMarkers={this.props.makeMarkers}
+          markers={this.props.markers}
         />)}
       </div>
     )

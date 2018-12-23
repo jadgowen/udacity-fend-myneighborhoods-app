@@ -19,7 +19,10 @@ class Sidebar extends Component {
   render() {
     return (
       <div className="sidebar">
-        <form onSubmit={this.filterLocations}>
+        <form
+          onSubmit={this.filterLocations}
+          className="searchForm"
+        >
           <input
             type="search"
             placeholder="search"
@@ -29,12 +32,14 @@ class Sidebar extends Component {
           />
           <input
             type="submit"
-            value="Filter"
+            value="Search"
             id="filter"
           />
         </form>
         <Locations
           locationData={this.props.locationData}
+          makeMarkers={this.props.makeMarkers}
+          markers={this.props.markers}
         />
       </div>
     )

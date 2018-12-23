@@ -13,7 +13,7 @@ state = {
   infowindow: {},
   params: {
     term: '',
-    location: 'Tucson',
+    location: 'Tucson 85711',
     limit: 10
   }
 }
@@ -66,8 +66,8 @@ getYelpData = (params) => {
 //Function that creates map and sets values to map state
 initMap = () => {
   var map = new window.google.maps.Map(document.getElementById('map'), {
-    center: {lat: 32.1930, lng: -110.8215},
-    zoom: 12,
+    center: {lat: 32.21945, lng: -110.86548},
+    zoom: 14,
     mapTypeControl: false
   })
   this.setState({map: map})
@@ -90,8 +90,8 @@ makeMarkerIcon = (markerColor) => {
 makeMarkers = () => {
   let infowindow = new window.google.maps.InfoWindow()
   let locMarkers = []
-  const defaultIcon = this.makeMarkerIcon('c29145')
-  const hoverIcon = this.makeMarkerIcon('9c9c9c')
+  const defaultIcon = this.makeMarkerIcon('197021')
+  const hoverIcon = this.makeMarkerIcon('e61919')
 
   function toggleAnimation(marker) {
     if (marker.getAnimation() !== null) {
@@ -109,15 +109,17 @@ makeMarkers = () => {
 
   this.state.locations.map(location => {
     let content = `
-      <img src="${location.image_url}" height="40px" width="40px">
+      <img src="${location.image_url}" class="thumbnail">
       <div><a href="${location.url}">${location.name} - ${location.location.address1}</a></div>
+      <div>Rating:${location.rating}</div>
     `
     let marker = new window.google.maps.Marker({
       position: {lat: location.coordinates.latitude, lng: location.coordinates.longitude},
       map: this.state.map,
       title: location.name + " - " + location.location.address1,
       animation: window.google.maps.Animation.DROP,
-      icon: defaultIcon
+      icon: defaultIcon,
+      id: location.id
     })
     marker.addListener('click', function() {
       infowindow.setContent(content)
@@ -141,7 +143,9 @@ makeMarkers = () => {
       <div className="App">
         <Sidebar
           locationData={this.state.locations}
+          markers={this.state.markers}
           updateParams={this.updateParams}
+          makeMarkers={this.makeMarkers}
         />
         <Map/>
       </div>
