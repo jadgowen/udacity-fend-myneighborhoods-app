@@ -11,19 +11,19 @@ state = {
   locations: [],
   markers: [],
   infowindow: {},
+  // Parameters sent to Yelp API
   params: {
     term: '',
     location: 'Tucson 85711',
-    limit: 10
+    limit: 10,
+    radius: 5000
   }
 }
 
 //Render map and get initial Yelp API data on component load
 componentDidMount() {
   this.renderMap()
-  setTimeout(
-    this.getYelpData()
-  ,2500)
+  this.getYelpData()
 }
 
 //Updates parameters based on query in Sidebar component, refreshes Yelp API data based on parameters
@@ -68,7 +68,9 @@ initMap = () => {
   var map = new window.google.maps.Map(document.getElementById('map'), {
     center: {lat: 32.21945, lng: -110.86548},
     zoom: 14,
-    mapTypeControl: false
+    mapTypeControl: false,
+    streetViewControl: false,
+    fullscreenControl: false
   })
   this.setState({map: map})
 }
@@ -128,9 +130,11 @@ makeMarkers = () => {
     })
     marker.addListener('mouseover', function() {
       this.setIcon(hoverIcon)
+      document.getElementById(location.id).setAttribute('style','text-decoration: underline; font-weight: bold;')
     })
     marker.addListener('mouseout', function() {
       this.setIcon(defaultIcon)
+      document.getElementById(location.id).removeAttribute('style','text-decoration: underline; font-weight: bold;')
     })
     locMarkers.push(marker)
     this.setState({markers: locMarkers})
@@ -138,16 +142,27 @@ makeMarkers = () => {
   })
 }
 
+// Show/hide sidebar
+toggleSidebar = () => {
+  if(document.getElementById('sidebar').style.width !== '25%') {
+    document.getElementById('sidebar').style.width = '25%'
+  } else {
+    document.getElementById('sidebar').style.width= '0'
+  }
+}
+
+
   render() {
     return (
       <div className="App">
-        <Sidebar
-          locationData={this.state.locations}
-          markers={this.state.markers}
-          updateParams={this.updateParams}
-          makeMarkers={this.makeMarkers}
-        />
-        <Map/>
+        <div className="menuBtn" onClick={this.toggleSidebar}>&#9776; Menu</div>
+          <Sidebar
+            locationData={this.state.locations}
+            markers={this.state.markers}
+            updateParams={this.updateParams}
+            makeMarkers={this.makeMarkers}
+          />
+          <Map/>
       </div>
     );
   }

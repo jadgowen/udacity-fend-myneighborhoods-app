@@ -12,6 +12,7 @@ openInfoWindow = (locationID) => {
   })
 }
 
+// Highlights marker when list item is hovered
 highlightMarker = (locationID) => {
   this.props.markers.map(marker => {
     if (marker.id === locationID) {
@@ -21,6 +22,7 @@ highlightMarker = (locationID) => {
   })
 }
 
+// Removes highlight from marker when no longer hovered
 unlightMarker = (locationID) => {
   this.props.markers.map(marker => {
     if (marker.id === locationID) {

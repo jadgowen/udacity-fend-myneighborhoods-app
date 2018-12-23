@@ -4,23 +4,28 @@ import Locations from './Locations'
 class Sidebar extends Component {
 
   state = {
-    query:""
+    query:"",
+    filter:""
   }
 
   updateQuery = (query) => {
     this.setState({ query })
   }
 
-  filterLocations = (e) => {
+  updateFilter = (filter) => {
+    this.setState({ filter })
+  }
+
+  queryLocations = (e) => {
     this.props.updateParams(this.state.query)
     e.preventDefault()
   }
 
   render() {
     return (
-      <div className="sidebar">
+      <div className="sidebar" id="sidebar">
         <form
-          onSubmit={this.filterLocations}
+          onSubmit={this.queryLocations}
           className="searchForm"
         >
           <input
@@ -33,6 +38,23 @@ class Sidebar extends Component {
           <input
             type="submit"
             value="Search"
+            id="search"
+          />
+        </form>
+        <form
+
+          className="searchForm"
+        >
+          <input
+            type="search"
+            placeholder="filter"
+            id="filter"
+            value={this.state.filter}
+            onChange={(e) => this.updateFilter(e.target.value)}
+          />
+          <input
+            type="submit"
+            value="Filter"
             id="filter"
           />
         </form>
