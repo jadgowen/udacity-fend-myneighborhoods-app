@@ -8,10 +8,12 @@ import MenuButton from './components/MenuButton'
 class App extends Component {
 
   state = {
+    // Objects to store map and infowindow data
     map: {},
+    infowindow: {},
+    // Master states to contain data from Yelp API
     locations: [],
     markers: [],
-    infowindow: {},
     // Parameters sent to Yelp API
     params: {
       term: '',
@@ -19,6 +21,7 @@ class App extends Component {
       limit: 10,
       radius: 5000
     },
+    // Location and marker containers modifiable by filter
     filter: '',
     visibleLocations: [],
     hiddenMarkers: []
@@ -41,23 +44,38 @@ class App extends Component {
 
   // Filters existing results
   filterResults = (filter) => {
+    // Pass value from Sidebar component to filter state
     this.setState({ filter })
-    this.state.markers.map(marker => marker.setVisible(false))
-    let filterVenues
-    let notVisibleMarkers
+    let visibleLocations
+    let hiddenMarkers
+    // Convert filter string to RegExp for .match function
     let regFilter = new RegExp(filter, 'i')
 
     if (filter) {
-      filterVenues = this.state.locations
-      .filter(location => location.name.match(regFilter))
-      
-
-      console.log("Filter: " + filter)
-      console.log(filterVenues)
-      this.setState({ visibleLocations: filterVenues})
+      // Populate visibleLocations with filtered locations
+      visibleLocations = this.state.locations
+        .filter(location => location.name.match(regFilter))
+      this.setState({ visibleLocations })
+      // Populate hiddenMarkers with filtered markers
+      hiddenMarkers = this.state.markers
+        .filter(marker => visibleLocations.every(location => location.id !== marker.id))
+      hiddenMarkers.map(marker => marker.setVisible(false))
+      this.setState({hiddenMarkers})
+    // If no filter, reset visibleLocations, make all markers visible, clear hiddenMarkers
     } else {
+      this.setState({ visibleLocations: this.state.locations })
+      this.state.markers.map(marker => marker.setVisible(true))
+      this.setState({ hiddenMarkers: [] })
       console.log("There's no filter!")
     }
+  }
+
+  removeFilter = () => {
+    this.setState({ filter: '' })
+    this.setState({ visibleLocations: this.state.locations })
+    this.state.markers.map(marker => marker.setVisible(true))
+    this.setState({ hiddenMarkers: [] })
+    console.log("Filter has been removed!")
   }
 
   // Attaches the Google API script tag to index.html, allows for initMap callback to reference properly
@@ -81,7 +99,8 @@ class App extends Component {
     )
     .then(response => {
       this.setState({
-        locations: response.data.businesses
+        locations: response.data.businesses,
+        visibleLocations: response.data.businesses
       },this.makeMarkers)
     })
     .catch(error => {
@@ -113,7 +132,7 @@ class App extends Component {
     return markerImage;
   }
 
-  //Marker function inspired by https://stackoverflow.com/questions/22773651/reload-markers-on-googles-maps-api/26408428
+  // Marker function inspired by https://stackoverflow.com/questions/22773651/reload-markers-on-googles-maps-api/26408428
   makeMarkers = () => {
     let infowindow = new window.google.maps.InfoWindow()
     let locMarkers = []
@@ -192,11 +211,12 @@ class App extends Component {
           toggleSidebar={this.toggleSidebar}
         />
         <Sidebar
-          locationData={this.state.locations}
+          locationData={this.state.visibleLocations}
           markers={this.state.markers}
           updateParams={this.updateParams}
           makeMarkers={this.makeMarkers}
           filterResults={this.filterResults}
+          removeFilter={this.removeFilter}
         />
         <Map/>
       </div>

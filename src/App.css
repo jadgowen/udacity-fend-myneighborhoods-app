@@ -1,3 +1,4 @@
+/* App Container */
 .App {
   text-align: center;
   display: flex;
@@ -6,29 +7,19 @@
   width: 100vw;
 }
 
+/* Map */
 #map {
   width: 100%;
   height: 100%;
 }
 
+/* InfoWindow Image Thumbnail */
 .thumbnail {
   height: 150px;
   width: 150px;
 }
 
-.sidebar {
-  width: 25%;
-  height: 100%;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  overflow-x: hidden;
-  display: none;
-  background: #000;
-  color: #c3c3c3;
-}
-
+/* Menu Button */
 .menuBtn {
   position: absolute;
   top: 10px;
@@ -46,8 +37,18 @@
   color: #2396cf;
 }
 
-.searchForm {
-  height: 10%;
+/* Sidebar */
+.sidebar {
+  width: 25%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  overflow-x: hidden;
+  display: none;
+  background: #000;
+  color: #c3c3c3;
 }
 
 .sidebar li {
@@ -56,10 +57,43 @@
     cursor: pointer;
 }
 
-input#search, input#filter {
-    width: 100%;
+.form {
+  height: 10%;
+}
+
+input#filter-button,
+input#no-filter-button,
+input#search-button {
+    color: #2396cf;
+    background-color: #000;
+    border: 0px;
+    margin-top: 10px;
+    width: 50%;
     height: 2rem;
     font-size: 1rem;
+}
+
+input#filter-button:hover,
+input#no-filter-button:hover,
+input#search-button:hover {
+    color: #000;
+    background-color: #2396cf;
+}
+
+input#filter-field,
+input#search-field {
+  width: 100%;
+  height: 2rem;
+  font-size: 1rem;
+  background-color: #000;
+  color: #2396cf;
+  border: none;
+  border-bottom: 3px solid #2396cf;
+}
+
+input#filter-field::placeholder,
+input#search-field::placeholder {
+  color: #2396cf;
 }
 
 .locations {

@@ -31,36 +31,45 @@ class Sidebar extends Component {
       <div className="sidebar" id="sidebar">
         <form
           onSubmit={this.queryLocations}
-          className="searchForm"
+          className="form"
         >
           <input
             type="search"
             placeholder="Conduct New Search"
-            id="search"
+            id="search-field"
             value={this.state.query}
+            className="search"
             onChange={(e) => this.updateQuery(e.target.value)}
           />
           <input
             type="submit"
             value="Search"
-            id="search"
+            id="search-button"
+            className="search"
           />
         </form>
         <form
           onSubmit={this.filterLocations}
-          className="searchForm"
+          className="form"
         >
           <input
             type="search"
             placeholder="Filter Results"
-            id="filter"
+            id="filter-field"
             value={this.state.filter}
+            className="filter"
             onChange={(e) => this.updateFilter(e.target.value)}
           />
           <input
             type="submit"
             value="Filter"
-            id="filter"
+            id="filter-button"
+          />
+          <input
+            type="button"
+            id="no-filter-button"
+            value="Unfilter"
+            onClick={this.props.removeFilter}
           />
         </form>
         <Locations
