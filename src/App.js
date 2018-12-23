@@ -3,6 +3,7 @@ import './App.css';
 import axios from 'axios';
 import Map from './components/Map'
 import Sidebar from './components/Sidebar'
+import MenuButton from './components/MenuButton'
 
 class App extends Component {
 
@@ -130,11 +131,11 @@ makeMarkers = () => {
     })
     marker.addListener('mouseover', function() {
       this.setIcon(hoverIcon)
-      document.getElementById(location.id).setAttribute('style','text-decoration: underline; font-weight: bold;')
+      document.getElementById(location.id).setAttribute('style','text-decoration: underline; font-weight: bold; color: #2396cf;')
     })
     marker.addListener('mouseout', function() {
       this.setIcon(defaultIcon)
-      document.getElementById(location.id).removeAttribute('style','text-decoration: underline; font-weight: bold;')
+      document.getElementById(location.id).removeAttribute('style','text-decoration: underline; font-weight: bold; color: #2396cf;')
     })
     locMarkers.push(marker)
     this.setState({markers: locMarkers})
@@ -143,6 +144,7 @@ makeMarkers = () => {
 }
 
 // Show/hide sidebar
+/*
 toggleSidebar = () => {
   if(document.getElementById('sidebar').style.width !== '25%') {
     document.getElementById('sidebar').style.width = '25%'
@@ -150,24 +152,36 @@ toggleSidebar = () => {
     document.getElementById('sidebar').style.width= '0'
   }
 }
+*/
+
+toggleSidebar = () => {
+  if(document.getElementById('sidebar').style.display !== 'block') {
+    document.getElementById('sidebar').style.display = 'block'
+  } else {
+    document.getElementById('sidebar').style.display = 'none'
+  }
+}
 
 
   render() {
     return (
       <div className="App">
-        <div className="menuBtn" onClick={this.toggleSidebar}>&#9776; Menu</div>
-          <Sidebar
-            locationData={this.state.locations}
-            markers={this.state.markers}
-            updateParams={this.updateParams}
-            makeMarkers={this.makeMarkers}
-          />
-          <Map/>
+        <MenuButton
+          toggleSidebar={this.toggleSidebar}
+        />
+        <Sidebar
+          locationData={this.state.locations}
+          markers={this.state.markers}
+          updateParams={this.updateParams}
+          makeMarkers={this.makeMarkers}
+        />
+        <Map/>
       </div>
     );
   }
 }
 
+// Appends Google API script to index.html
 function loadScript(url) {
   var index = window.document.getElementsByTagName("script")[0];
   var script = window.document.createElement("script");

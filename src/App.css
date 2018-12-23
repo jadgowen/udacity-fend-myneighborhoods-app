@@ -17,14 +17,14 @@
 }
 
 .sidebar {
-  width: 0;
+  width: 25%;
   height: 100%;
   position: fixed;
   z-index: 1;
   top: 0;
   left: 0;
   overflow-x: hidden;
-  transition: 0.5s;
+  display: none;
   background: #000;
   color: #c3c3c3;
 }
@@ -68,11 +68,11 @@ input#search, input#filter {
 }
 
 .location-info {
-  color: #c3c3c3;
   font-size: 1rem;
 }
 
 .location-info:hover {
   text-decoration: underline;
   font-weight: bold;
+  color: #2396cf;
 }

@@ -21,6 +21,11 @@ class Sidebar extends Component {
     e.preventDefault()
   }
 
+  filterLocations = (e) => {
+    console.log(this.props.location)
+    e.preventDefault()
+  }
+
   render() {
     return (
       <div className="sidebar" id="sidebar">
@@ -30,7 +35,7 @@ class Sidebar extends Component {
         >
           <input
             type="search"
-            placeholder="search"
+            placeholder="Conduct New Search"
             id="search"
             value={this.state.query}
             onChange={(e) => this.updateQuery(e.target.value)}
@@ -42,12 +47,12 @@ class Sidebar extends Component {
           />
         </form>
         <form
-
+          onSubmit={this.filterLocations}
           className="searchForm"
         >
           <input
             type="search"
-            placeholder="filter"
+            placeholder="Filter Results"
             id="filter"
             value={this.state.filter}
             onChange={(e) => this.updateFilter(e.target.value)}
