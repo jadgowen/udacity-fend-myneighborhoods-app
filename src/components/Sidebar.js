@@ -22,7 +22,7 @@ class Sidebar extends Component {
   }
 
   filterLocations = (e) => {
-    console.log(this.props.location)
+    this.props.filterResults(this.state.filter)
     e.preventDefault()
   }
 
