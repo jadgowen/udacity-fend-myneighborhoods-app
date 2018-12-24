@@ -123,6 +123,14 @@ input#search-field::placeholder {
   color: #c3c3c3;
 }
 
+/* Error Page */
+.error {
+  text-align: center;
+  font-size: 2rem;
+  color: #000;
+  margin-top: 20%;
+}
+
 /* Resize Sidebar if on tablet */
 @media screen and (max-width: 800px) {
   .sidebar {

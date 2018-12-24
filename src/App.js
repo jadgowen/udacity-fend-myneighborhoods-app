@@ -24,7 +24,7 @@ class App extends Component {
     // Location and marker containers modifiable by filter
     filter: '',
     visibleLocations: [],
-    hiddenMarkers: []
+    hiddenMarkers: [],
   }
 
   // Render map and get initial Yelp API data on component load
@@ -158,7 +158,7 @@ class App extends Component {
     this.state.locations.map(location => {
       // String used to populate InfoWindow
       let content = `
-        <div tabIndex="-1" aria-label="info window">
+        <div tabIndex="0" aria-label="info window">
           <img src="${location.image_url}" class="thumbnail" alt="Picture of ${location.name}">
           <div><a href="${location.url}">${location.name} - ${location.location.address1}</a></div>
           <div>Rating:${location.rating}</div>
@@ -208,22 +208,36 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div className="App">
-        <MenuButton
-          toggleSidebar={this.toggleSidebar}
-        />
-        <Sidebar
-          locationData={this.state.visibleLocations}
-          markers={this.state.markers}
-          updateParams={this.updateParams}
-          makeMarkers={this.makeMarkers}
-          filterResults={this.filterResults}
-          removeFilter={this.removeFilter}
-        />
-        <Map/>
-      </div>
-    );
+    // Returned if connection does not exist
+    if(!navigator.onLine) {
+      return (
+        <div
+          aria-label="Error Loading Page"
+          id="error"
+          tabIndex="0"
+        >
+          There was an error loading the page, please verify your connection!
+        </div>
+      )
+    // Returned if connection exists
+    } else {
+      return (
+        <div className="App">
+          <MenuButton
+            toggleSidebar={this.toggleSidebar}
+          />
+          <Sidebar
+            locationData={this.state.visibleLocations}
+            markers={this.state.markers}
+            updateParams={this.updateParams}
+            makeMarkers={this.makeMarkers}
+            filterResults={this.filterResults}
+            removeFilter={this.removeFilter}
+          />
+          <Map/>
+        </div>
+      )
+    }
   }
 }
 
@@ -235,9 +249,6 @@ function loadScript(url) {
   script.async = true;
   script.defer = true;
   index.parentNode.insertBefore(script, index);
-  script.onerror = function() {
-    alert("Error!")
-  }
 }
 
 export default App;
