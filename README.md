@@ -1,12 +1,12 @@
 ## MyNeighborhoods App Project
 
 ## Table of Contents
- - Overview
- - Project Requirements
- - Downloading/Running the Project
- - Dependencies
- - APIs
- - Thanks!
+ - [Overview](#Overview)
+ - [Project Requirements](#Project Requirements)
+ - [Downloading/Running the Project](#Downloading/Running the Project)
+ - [Dependencies](#Dependencies)
+ - [APIs](#APIs)
+ - [Thanks!](#Thanks!)
 
 ## Overview
 This SPA(single page application) is designed to show businesses from my home town of Tucson, Arizona, US. Within the SPA you are able to search for businesses, filter the results of that search, and access additional information while mapping them across the selected area.
