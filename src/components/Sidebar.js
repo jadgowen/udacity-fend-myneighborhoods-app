@@ -77,6 +77,10 @@ class Sidebar extends Component {
           makeMarkers={this.props.makeMarkers}
           markers={this.props.markers}
         />
+        <div className="footer">
+          Made by Joe Gowen for Udacity FEND Nanodegree.
+          This MyNeighborhoods App uses 3rd-party data from the <a href="https://www.yelp.com/developers">Yelp API</a>.
+        </div>
       </div>
     )
   }

@@ -7,7 +7,10 @@ class MenuButton extends Component {
         className="menuBtn"
         onClick={this.props.toggleSidebar}
       >
-        &#9776; Menu
+        &#9776;
+        <span class="menu-text">
+          Menu
+        </span>
       </div>
     )
   }

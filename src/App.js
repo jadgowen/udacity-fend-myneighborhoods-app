@@ -158,9 +158,10 @@ class App extends Component {
     this.state.locations.map(location => {
       // String used to populate InfoWindow
       let content = `
-        <img src="${location.image_url}" class="thumbnail">
+        <img src="${location.image_url}" class="thumbnail" alt="Picture of ${location.name}">
         <div><a href="${location.url}">${location.name} - ${location.location.address1}</a></div>
         <div>Rating:${location.rating}</div>
+        <div>Data provided by <a href="https://www.yelp.com">Yelp!</a></div>
       `
       // Marker values created location
       let marker = new window.google.maps.Marker({
