@@ -1,44 +1,52 @@
+## MyNeighborhoods App Project
+
+## Table of Contents
+ - Overview
+ - Project Requirements
+ - Downloading/Running the Project
+ - Dependencies
+ - APIs
+ - Thanks!
+
+## Overview
+This SPA(single page application) is designed to show businesses from my home town of Tucson, Arizona, US. Within the SPA you are able to search for businesses, filter the results of that search, and access additional information while mapping them across the selected area.
+
+
+## Project Requirements
+A list of project requirements from Udacity can be accessed [here](https://review.udacity.com/#!/rubrics/1351/view).
+### Highlights:
+  - The project is a single page application
+  - The project must use a Google Maps API
+  - The project must get information from a third-party API
+  - The information must be filterable
+  - The information must be plotted on the Map and show additional info when a marker is clicked
+  - The project must use a service worker
+  - The project must have ARIA ally attributes
+
+## Downloading/Running the Project
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+You can clone the git repo and run it in development mode locally:
+```
+$ git clone https://github.com/jadgowen/udacity-fend-myneighborhoods-app
+$ npm install
+$ npm install axios -s
+$ npm start
+```
+The development mode can now be accessed at [http://localhost:3000](http://localhost:3000)
 
-In the project directory, you can run:
+To view the project in production (verify service worker is active), you can:
+```
+$ npm run build
+$ serve -s build
+```
+The production environment will be accessible at [http://localhost:5000](http://localhost:5000)
 
-### `npm start`
+## Dependencies
+The project uses html, css, and js functionality contained within the [Create React App](https://github.com/facebook/create-react-app) container. It also uses [axios](https://www.npmjs.com/package/axios) to manage the headers sent to the Yelp API.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## APIs
+This project uses the Google Maps API and Yelp API to meet the project requirements for information fetching and visualization.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Thanks!
+Quite possibly the most challenging project in the FEND course, it makes sense that it would be the final project. I wanted to thank the kind people at [Udacity](https://www.udacity.com/), the student resources, and contributors at sites like [W3 Schools](https://www.w3schools.com/) and [StackOverflow](https://stackoverflow.com/). I will never cease to be amazed at how talented and knowledgeable people are. I certainly wouldn't have been able to complete this project without them!
