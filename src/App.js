@@ -235,6 +235,9 @@ function loadScript(url) {
   script.async = true;
   script.defer = true;
   index.parentNode.insertBefore(script, index);
+  script.onerror = function() {
+    alert("Error!")
+  }
 }
 
 export default App;
