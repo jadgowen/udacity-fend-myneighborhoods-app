@@ -37,9 +37,18 @@ class LocationInfo extends Component {
         <li
           className="location-info"
           id={this.props.id}
+          aria-label={this.props.name}
+          tabIndex="0"
           onClick={() =>
             {
               this.openInfoWindow(this.props.id)
+            }
+          }
+          onKeyPress={(e) =>
+            {
+              if(e.key === 'Enter') {
+                this.openInfoWindow(this.props.id)
+              }
             }
           }
           onMouseOver={() =>

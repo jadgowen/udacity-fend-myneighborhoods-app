@@ -37,6 +37,7 @@ class Sidebar extends Component {
             type="search"
             placeholder="Conduct New Search"
             id="search-field"
+            aria-label="search text field"
             value={this.state.query}
             className="search"
             onChange={(e) => this.updateQuery(e.target.value)}
@@ -45,6 +46,8 @@ class Sidebar extends Component {
             type="submit"
             value="Search"
             id="search-button"
+            aria-label="search button"
+            htmlFor="search text field"
             className="search"
           />
         </form>
@@ -56,6 +59,7 @@ class Sidebar extends Component {
             type="search"
             placeholder="Filter Results"
             id="filter-field"
+            aria-label="filter text field"
             value={this.state.filter}
             className="filter"
             onChange={(e) => this.updateFilter(e.target.value)}
@@ -64,10 +68,14 @@ class Sidebar extends Component {
             type="submit"
             value="Filter"
             id="filter-button"
+            aria-label="filter button"
+            htmlFor="filter text field"
           />
           <input
             type="button"
             id="no-filter-button"
+            aria-label="remove filter button"
+            htmlFor="filter text field"
             value="Unfilter"
             onClick={this.props.removeFilter}
           />
@@ -79,7 +87,7 @@ class Sidebar extends Component {
         />
         <div className="footer">
           Made by Joe Gowen for Udacity FEND Nanodegree.
-          This MyNeighborhoods App uses 3rd-party data from the <a href="https://www.yelp.com/developers">Yelp API</a>.
+          This MyNeighborhoods App uses 3rd-party data from the <a href="https://www.yelp.com/developers" aria-label="Yelp API Developer Link" tabIndex="-1">Yelp API</a>.
         </div>
       </div>
     )

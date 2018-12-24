@@ -3,15 +3,18 @@ import React, { Component } from 'react'
 class MenuButton extends Component {
   render() {
     return (
-      <div
+      <button
         className="menuBtn"
         onClick={this.props.toggleSidebar}
+        tabIndex="0"
       >
         &#9776;
-        <span class="menu-text">
+        <span
+          className="menu-text"
+        >
           Menu
         </span>
-      </div>
+      </button>
     )
   }
 }
