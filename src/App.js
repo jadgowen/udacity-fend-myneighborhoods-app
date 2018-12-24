@@ -178,6 +178,7 @@ class App extends Component {
       marker.addListener('click', function() {
         infowindow.setContent(content)
         infowindow.open(this, marker)
+        marker.map.setCenter(this.getPosition())
         toggleAnimation(marker)
       })
       // Event changes icon color and highlights corresponding list item
